@@ -59,21 +59,13 @@ func part1(lines []string) int {
 		if err != nil {
 			log.Fatal(fmt.Sprintf("Failed part 1 ticks parsing at row %v:", i), err)
 		}
-		var new int
-		switch string(direction) {
-		case "L":
-			new = pos - ticks%100
-			if new < 0 {
-				new = 100 + new
-			}
+		switch direction {
+		case 'L':
+			pos = (pos - ticks) % 100
 
-		case "R":
-			new = pos + ticks%100
-			if new > 99 {
-				new = new - 100
-			}
+		case 'R':
+			pos = (pos + ticks) % 100
 		}
-		pos = new
 		if pos == 0 {
 			numZero++
 		}
@@ -114,10 +106,7 @@ func part2(lines []string) int {
 		if pos == 0 && zeroClick == 0 {
 			numZero++
 		}
-
-		if ticks > 0 {
-			zeroClick += (ticks / 100)
-		}
+		zeroClick += (ticks / 100)
 
 		numZero += zeroClick
 	}
